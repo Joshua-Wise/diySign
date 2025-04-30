@@ -93,3 +93,7 @@ To run the application in development mode with automatic reloading:
 ```
 npm run dev
 ```
+
+## Notice
+
+This repo has not been sanitized and contains reference & color design matching that of my employer.
