@@ -25,8 +25,8 @@ A containerized web application that allows users to generate professional email
 
 1. Clone this repository:
    ```
-   git clone <repository-url>
-   cd signature-generator
+   git clone https://github.com/Joshua-Wise/diySign
+   cd diySign
    ```
 
 2. Build and start the Docker container:
@@ -43,8 +43,8 @@ A containerized web application that allows users to generate professional email
 
 1. Clone this repository:
    ```
-   git clone <repository-url>
-   cd signature-generator
+   git clone https://github.com/Joshua-Wise/diySign
+   cd diySign
    ```
 
 2. Install dependencies:

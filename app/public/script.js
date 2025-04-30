@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                         >
                                                                             <tbody>
                                                                                 <tr style="font-size: 16px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                         ${name}
                                                                                         <span style="font-family: remialcxesans; font-size: 1px; color: #ffffff; line-height: 1px;">
                                                                                             &ZeroWidthSpace;<span style="font-family: 'template-lPrnPSSYEfCLPQAiSCarSw';">&ZeroWidthSpace;</span>
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                         >
                                                                                             <tbody>
                                                                                                 <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                                    <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                                         ${title}<br />
                                                                                                     </td>
                                                                                                 </tr>
@@ -174,10 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">${organization}</td>
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${organization}</td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                         ${address}<br />
                                                                                     </td>
                                                                                 </tr>
@@ -191,14 +191,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                         >
                                                                                             <tbody>
                                                                                                 <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif;">${email}</td>
+                                                                                                    <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${email}</td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">${phone}<br /></td>
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${phone}<br /></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                         >
                                                                             <tbody>
                                                                                 <tr style="font-size: 16px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                         ${name}
                                                                                         <span style="font-family: remialcxesans; font-size: 1px; color: #ffffff; line-height: 1px;">
                                                                                             &ZeroWidthSpace;<span style="font-family: 'template-lPrnPSSYEfCLPQAiSCarSw';">&ZeroWidthSpace;</span>
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                         >
                                                                                             <tbody>
                                                                                                 <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                                    <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                                         ${title}<br />
                                                                                                     </td>
                                                                                                 </tr>
@@ -370,10 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">${organization}</td>
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${organization}</td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">
                                                                                         ${address}<br />
                                                                                     </td>
                                                                                 </tr>
@@ -387,14 +387,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                         >
                                                                                             <tbody>
                                                                                                 <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif;">${email}</td>
+                                                                                                    <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${email}</td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif;">${phone}<br /></td>
+                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c;">${phone}<br /></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
