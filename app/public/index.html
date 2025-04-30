@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>diySign</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="images/diySign-logo.png" alt="diySign Logo" class="header-logo" style="height: 60px; margin-bottom: 10px;">
+    </header>
+
+    <main>
+      <div class="form-container">
+        <h2>Your Information</h2>
+        <form id="signature-form">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe">
+          </div>
+          
+          <div class="form-group">
+            <label for="title">Job Title</label>
+            <input type="text" id="title" name="title" placeholder="Coordinator">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="johndoe@celinaisd.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="campus">Campus</label>
+            <select id="campus" name="campus">
+              <!-- Options will be populated dynamically from campuses.json -->
+            </select>
+          </div>
+          
+          <div class="form-group info-section" style="display: none;">
+            <h3>Organization Information</h3>
+            <p id="organization-display"><strong>Organization:</strong> <span id="organization">CELINA INDEPENDENT SCHOOL DISTRICT</span></p>
+            <p id="address-display"><strong>Address:</strong> <span id="address">205 S. Colorado • Celina, TX 75009</span></p>
+            <p id="phone-display"><strong>Phone:</strong> <span id="phone">469-742-9100</span></p>
+            <p><strong>Values:</strong> COMMUNITY    EXCELLENCE    INNOVATION    LEADERSHIP    STEWARDSHIP</p>
+          </div>
+          
+          <button type="submit" class="btn-generate">Generate Signature</button>
+        </form>
+      </div>
+      
+      <div class="preview-container">
+        <h2>Signature Preview</h2>
+        <div class="preview-box">
+          <div id="signature-preview"></div>
+        </div>
+        <div class="actions">
+          <button id="btn-copy" class="btn-action">
+            <i class="fas fa-copy"></i> Copy to Clipboard
+          </button>
+          <a href="https://mail.google.com/mail/u/0/#settings/general" target="_blank" class="btn-action">
+            <i class="fas fa-cog"></i> Gmail Settings
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>diySign | 2025 | <a href="/login" class="footer-link" style="color: #777; text-decoration: none;">settings</a></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

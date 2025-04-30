@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>diySign - Admin</title>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="images/favicon/site.webmanifest">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="images/diySign-logo.png" alt="diySign Logo" class="header-logo" style="height: 60px; margin-bottom: 10px;">
+      <nav>
+        <a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="admin-container">
+        <div class="form-container">
+          <div class="campus-management-header">
+            <h2>Locations
+              <button id="add-campus-button" class="btn-add">
+                <i class="fas fa-plus"></i>
+              </button>
+            </h2>
+          </div>
+          
+          <div class="campus-list-container">
+            <div id="campus-list" class="campus-list">
+              <!-- Campus list will be populated here -->
+              <div class="loading">Loading campuses...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>diySign | 2025</p>
+    </footer>
+  </div>
+  
+  <!-- Modal for adding/editing campus -->
+  <div id="campus-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Add New Campus</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="campus-form">
+          <input type="hidden" id="campus-id" name="id" value="">
+          
+          <div class="form-group">
+            <label for="campus-name">Campus Name</label>
+            <input type="text" id="campus-name" name="name" placeholder="e.g., Celina High School" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="campus-organization">Organization</label>
+            <input type="text" id="campus-organization" name="organization" placeholder="e.g., CELINA HIGH SCHOOL" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="campus-address">Address</label>
+            <input type="text" id="campus-address" name="address" placeholder="e.g., 3455 N. Preston Rd • Celina, TX 75009" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="campus-phone">Phone</label>
+            <input type="text" id="campus-phone" name="phone" placeholder="e.g., 469-742-9100" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="campus-logo">Logo</label>
+            <div class="logo-selection-container">
+              <div class="logo-preview">
+                <img id="selected-logo-preview" src="images/logos/district-logo.png" alt="Selected Logo" style="max-width: 100px; max-height: 75px;">
+              </div>
+              <div class="logo-actions">
+                <button type="button" id="select-logo-button" class="btn-secondary">Select Logo</button>
+                <button type="button" id="upload-logo-button" class="btn-secondary">Upload New Logo</button>
+                <input type="file" id="logo-file-input" accept="image/*" style="display: none;">
+                <input type="hidden" id="campus-logo-path" name="logoPath" value="images/logos/district-logo.png">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" id="save-button" class="btn-primary">Add Campus</button>
+            <button type="button" id="cancel-button" class="btn-secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for logo selection -->
+  <div id="logo-selection-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Select Logo</h3>
+        <span class="close-modal-logo">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="logos-grid" class="logos-grid">
+          <!-- Logos will be populated here -->
+          <div class="loading">Loading logos...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
