@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let address = "205 S. Colorado • Celina, TX 75009";
   let phone = "469-742-9100";
   let logoPath = "images/logos/district-logo.png"; // Default logo path
-  const tagline = "COMMUNITY    EXCELLENCE    INNOVATION    LEADERSHIP    STEWARDSHIP";
+  const tagline = "COMMUNITY&nbsp;&nbsp;&nbsp;EXCELLENCE&nbsp;&nbsp;&nbsp;INNOVATION&nbsp;&nbsp;&nbsp;LEADERSHIP&nbsp;&nbsp;&nbsp;STEWARDSHIP";
   const fontFamily = "Arial, sans-serif";
   const primaryColor = "#F05A28"; // Orange color from the logo
   const taglineBgColor = "#746c6c"; // Updated tagline background color
@@ -99,9 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Generate signature based on form inputs and static values
   function generateSignature() {
-    const name = document.getElementById('name').value || "John Doe";
+    const name = document.getElementById('name').value || "John Doe"; // Use default value if empty
     const title = document.getElementById('title').value || "Coordinator"; // Use default value if empty
-    const email = document.getElementById('email').value || "johndoe@celinaisd.com";
+    const email = document.getElementById('email').value || "johndoe@celinaisd.com"; // Use default value if empty
     
     // Create signature HTML with the structure from signexample.html
     const signatureHtml = `
@@ -232,11 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                             "
                                                                         >
                                                                             <tbody>
-                                                                                <tr style="font-size: 14px;">
+                                                                                <tr style="font-size: 12px;">
                                                                                     <td style="font-family: Calibri, Arial, sans-serif;">${tagline}<br /></td>
                                                                                 </tr>
                                                                             </tbody>
-                                                                        </table>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -428,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                             "
                                                                         >
                                                                             <tbody>
-                                                                                <tr style="font-size: 14px;">
+                                                                                <tr style="font-size: 12px;">
                                                                                     <td style="font-family: Calibri, Arial, sans-serif;">${tagline}<br /></td>
                                                                                 </tr>
                                                                             </tbody>
