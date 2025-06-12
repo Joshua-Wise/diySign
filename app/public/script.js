@@ -103,8 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = document.getElementById('title').value || "Coordinator"; // Use default value if empty
     const email = document.getElementById('email').value || "johndoe@celinaisd.com"; // Use default value if empty
     
-    // Create signature HTML with the structure from signexample.html
-    const signatureHtml = `
+    // Get the absolute URL for the logo
+    const absoluteLogoUrl = new URL(logoPath, window.location.href).href;
+    
+    // Create Gmail-friendly HTML signature
+    const gmailFriendlyHtml = `
       <div dir="ltr" style="mso-line-height-rule: exactly; -webkit-text-size-adjust: 100%; font-size: 1px; direction: ltr;">
         <table dir="ltr" cellpadding="0" cellspacing="0" border="0" style="width: 100%; direction: ltr; border-collapse: collapse; font-size: 1px;">
             <tbody>
@@ -132,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                             height="150"
                                                                                             border="0"
                                                                                             alt=""
-                                                                                            style="width: 200px; min-width: 200px; max-width: 200px; height: 150px; min-height: 150px; max-height: 150px; font-size: 0;"
+                                                                                            style="width: 175px; min-width: 175px; max-width: 175px; height: 125px; min-height: 125px; max-height: 125px; font-size: 0;"
                                                                                         />
                                                                                     </td>
                                                                                 </tr>
@@ -144,10 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                             cellpadding="0"
                                                                             cellspacing="0"
                                                                             border="0"
-                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 700; white-space: nowrap;"
+                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
                                                                         >
                                                                             <tbody>
-                                                                                <tr style="font-size: 16px;">
+                                                                                <tr style="font-size: 14px;">
                                                                                     <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 700;">
                                                                                         ${name}
                                                                                         <span style="font-family: remialcxesans; font-size: 1px; color: #ffffff; line-height: 1px;">
@@ -164,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                             style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
                                                                                         >
                                                                                             <tbody>
-                                                                                                <tr style="font-size: 14px;">
+                                                                                                <tr style="font-size: 13px;">
                                                                                                     <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">
                                                                                                         ${title}<br />
                                                                                                     </td>
@@ -173,10 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                         </table>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr style="font-size: 14px;">
+                                                                                <tr style="font-size: 13px;">
                                                                                     <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${organization}</td>
                                                                                 </tr>
-                                                                                <tr style="font-size: 14px;">
+                                                                                <tr style="font-size: 13px;">
                                                                                     <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">
                                                                                         ${address}<br />
                                                                                     </td>
@@ -187,17 +190,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                             cellpadding="0"
                                                                                             cellspacing="0"
                                                                                             border="0"
-                                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 700; white-space: nowrap;"
+                                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
                                                                                         >
                                                                                             <tbody>
-                                                                                                <tr style="font-size: 14px;">
+                                                                                                <tr style="font-size: 13px;">
                                                                                                     <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${email}</td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </td>
                                                                                 </tr>
-                                                                                <tr style="font-size: 14px;">
+                                                                                <tr style="font-size: 13px;">
                                                                                     <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${phone}<br /></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -209,34 +212,27 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </td>
                                                 </tr>
                                                 <tr style="font-size: 0;">
-                                                    <td align="center" style="vertical-align: top;">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0;">
+                                                    <td align="center" colspan="2" style="background-color: #746c6c; padding: 3px 8px; vertical-align: top; width: 100%;">
+                                                        <table
+                                                            cellpadding="0"
+                                                            cellspacing="0"
+                                                            border="0"
+                                                            style="
+                                                                white-space: nowrap;
+                                                                color: #ffffff;
+                                                                font-size: 14.67px;
+                                                                font-family: Calibri, Arial, sans-serif;
+                                                                font-weight: 700;
+                                                                font-style: normal;
+                                                                text-align: center;
+                                                                line-height: 20px;
+                                                                width: 100%;
+                                                                border-collapse: collapse;
+                                                            "
+                                                        >
                                                             <tbody>
-                                                                <tr style="font-size: 0;">
-                                                                    <td align="center" style="background-color: #746c6c; padding: 3px 8px; vertical-align: top;">
-                                                                        <table
-                                                                            cellpadding="0"
-                                                                            cellspacing="0"
-                                                                            border="0"
-                                                                            style="
-                                                                                white-space: nowrap;
-                                                                                color: #ffffff;
-                                                                                font-size: 14.67px;
-                                                                                font-family: Calibri, Arial, sans-serif;
-                                                                                font-weight: 700;
-                                                                                font-style: normal;
-                                                                                text-align: center;
-                                                                                line-height: 20px;
-                                                                                width: 100%;
-                                                                                border-collapse: collapse;
-                                                                            "
-                                                                        >
-                                                                            <tbody>
-                                                                                <tr style="font-size: 12px;">
-                                                                                    <td style="font-family: Calibri, Arial, sans-serif;">${tagline}<br /></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                    </td>
+                                                                <tr style="font-size: 10px;">
+                                                                    <td style="font-family: Calibri, Arial, sans-serif; text-align: center;">${tagline}<br /></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -256,8 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     
     // Update preview
-    signaturePreview.innerHTML = signatureHtml;
-    currentSignatureHtml = signatureHtml;
+    signaturePreview.innerHTML = gmailFriendlyHtml;
+    currentSignatureHtml = gmailFriendlyHtml;
     
     // Show success message
     const formContainer = document.querySelector('.form-container');
@@ -284,180 +280,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
   
-  // Copy Gmail-friendly signature HTML to clipboard
+  // Copy signature HTML to clipboard
   function copyToClipboard() {
     if (!currentSignatureHtml) {
       alert('Please generate a signature first.');
       return;
     }
     
-    const name = document.getElementById('name').value || "John Doe";
-    const title = document.getElementById('title').value || "Coordinator";
-    const email = document.getElementById('email').value || "johndoe@celinaisd.com";
-    
-    // Get the absolute URL for the logo
-    const absoluteLogoUrl = new URL(logoPath, window.location.href).href;
-    
-    // Create a Gmail-friendly HTML structure with table layout and inline styles
-    const gmailFriendlyHtml = `
-      <div dir="ltr" style="mso-line-height-rule: exactly; -webkit-text-size-adjust: 100%; font-size: 1px; direction: ltr;">
-        <table dir="ltr" cellpadding="0" cellspacing="0" border="0" style="width: 100%; direction: ltr; border-collapse: collapse; font-size: 1px;">
-            <tbody>
-                <tr style="font-size: 0;">
-                    <td align="left" style="vertical-align: top;">
-                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0;">
-                            <tbody>
-                                <tr style="font-size: 0;">
-                                    <td align="left" style="vertical-align: top;">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0;">
-                                            <tbody>
-                                                <tr style="font-size: 0;">
-                                                    <td align="left" style="vertical-align: top;">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0;">
-                                                            <tbody>
-                                                                <tr style="font-size: 0;">
-                                                                    <td align="left" style="vertical-align: top;">
-                                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0; line-height: normal;">
-                                                                            <tbody>
-                                                                                <tr style="font-size: 0;">
-                                                                                    <td align="left" style="padding: 0 10px 0 0; vertical-align: top;">
-                                                                                        <img
-                                                                                            src="${absoluteLogoUrl}"
-                                                                                            width="200"
-                                                                                            height="150"
-                                                                                            border="0"
-                                                                                            alt=""
-                                                                                            style="width: 200px; min-width: 200px; max-width: 200px; height: 150px; min-height: 150px; max-height: 150px; font-size: 0;"
-                                                                                        />
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                    <td align="left" style="vertical-align: top;">
-                                                                        <table
-                                                                            cellpadding="0"
-                                                                            cellspacing="0"
-                                                                            border="0"
-                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
-                                                                        >
-                                                                            <tbody>
-                                                                                <tr style="font-size: 16px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 700;">
-                                                                                        ${name}
-                                                                                        <span style="font-family: remialcxesans; font-size: 1px; color: #ffffff; line-height: 1px;">
-                                                                                            &ZeroWidthSpace;<span style="font-family: 'template-lPrnPSSYEfCLPQAiSCarSw';">&ZeroWidthSpace;</span>
-                                                                                        </span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr style="font-size: 0;">
-                                                                                    <td align="left" style="vertical-align: top;">
-                                                                                        <table
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            border="0"
-                                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
-                                                                                        >
-                                                                                            <tbody>
-                                                                                                <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 0 0 10px; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">
-                                                                                                        ${title}<br />
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${organization}</td>
-                                                                                </tr>
-                                                                                <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">
-                                                                                        ${address}<br />
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr style="font-size: 0;">
-                                                                                    <td align="left" style="vertical-align: top;">
-                                                                                        <table
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            border="0"
-                                                                                            style="border-collapse: collapse; font-size: 0; color: #000001; font-style: normal; font-weight: 400; white-space: nowrap;"
-                                                                                        >
-                                                                                            <tbody>
-                                                                                                <tr style="font-size: 14px;">
-                                                                                                    <td align="left" style="padding: 10px 0 0; vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${email}</td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr style="font-size: 14px;">
-                                                                                    <td align="left" style="vertical-align: top; font-family: Calibri, Arial, sans-serif; color: #746c6c; font-weight: 400;">${phone}<br /></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr style="font-size: 0;">
-                                                    <td align="center" style="vertical-align: top;">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-size: 0;">
-                                                            <tbody>
-                                                                <tr style="font-size: 0;">
-                                                                    <td align="center" style="background-color: #746c6c; padding: 3px 8px; vertical-align: top;">
-                                                                        <table
-                                                                            cellpadding="0"
-                                                                            cellspacing="0"
-                                                                            border="0"
-                                                                            style="
-                                                                                white-space: nowrap;
-                                                                                color: #ffffff;
-                                                                                font-size: 14.67px;
-                                                                                font-family: Calibri, Arial, sans-serif;
-                                                                                font-weight: 700;
-                                                                                font-style: normal;
-                                                                                text-align: center;
-                                                                                line-height: 20px;
-                                                                                width: 100%;
-                                                                                border-collapse: collapse;
-                                                                            "
-                                                                        >
-                                                                            <tbody>
-                                                                                <tr style="font-size: 12px;">
-                                                                                    <td style="font-family: Calibri, Arial, sans-serif;">${tagline}<br /></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-    `;
-    
-    // Create a temporary div with the Gmail-friendly signature
+    // Create a temporary div with the signature
     const tempDiv = document.createElement('div');
     tempDiv.style.position = 'absolute';
     tempDiv.style.left = '-9999px';
     tempDiv.style.top = '0';
     tempDiv.style.opacity = '0';
-    tempDiv.innerHTML = gmailFriendlyHtml;
+    tempDiv.innerHTML = currentSignatureHtml;
     document.body.appendChild(tempDiv);
     
     try {

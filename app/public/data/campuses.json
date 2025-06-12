@@ -13,14 +13,15 @@
       "organization": "Celina High School",
       "address": "3455 N. Preston Rd • Celina, TX 75009",
       "phone": "469-742-9102",
-      "logoPath": "images/logos/logo-1745944358793-914122821.png",
+      "logoPath": "images/logos/district-logo.png",
       "id": "high_school"
     },
     {
       "name": "Moore Middle School",
       "organization": "Moore Middle School",
-      "address": "100 G.A. Moore Parkway • Celina, TX 75009",
+      "address": "300 G.A. Moore Parkway • Celina, TX 75009",
       "phone": "469-742-9101",
+      "logoPath": "images/logos/district-logo.png",
       "id": "junior_high"
     },
     {
