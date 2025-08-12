@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: diySign-prod
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=production
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - PORT=3000
+    restart: unless-stopped
+    volumes:
+      # Only mount data directory for persistence, not source code
+      - ./data:/app/app/public/data
+      - ./uploads:/app/app/public/images/logos

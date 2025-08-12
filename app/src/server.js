@@ -6,7 +6,7 @@ const fs = require('fs');
 const multer = require('multer');
 
 // Admin authentication
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -280,5 +280,7 @@ app.get('*', (req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Visit http://localhost:${PORT} to access the application`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`Visit http://localhost:${PORT} to access the application`);
+  }
 });

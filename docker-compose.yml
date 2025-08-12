@@ -12,5 +12,6 @@ services:
       - ./app:/app/app
       - ./package.json:/app/package.json
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-your_secure_password_here}
     restart: unless-stopped
