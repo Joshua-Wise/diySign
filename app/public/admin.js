@@ -324,11 +324,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     
-    logosGrid.innerHTML = availableLogos.map(logoPath => `
+    logosGrid.innerHTML = availableLogos.map(logoPath => {
+      const fileName = logoPath.split('/').pop().replace(/\.(png|jpg|jpeg|gif|svg)$/i, '').replace(/[-_]/g, ' ');
+      return `
       <div class="logo-item" data-path="${logoPath}">
-        <img src="${logoPath}" alt="Logo">
+        <img src="${logoPath}" alt="${fileName}">
       </div>
-    `).join('');
+    `;
+    }).join('');
     
     // Add event listeners to logo items
     document.querySelectorAll('.logo-item').forEach(item => {

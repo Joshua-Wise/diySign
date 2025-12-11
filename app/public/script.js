@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                                             width="200"
                                                                                             height="150"
                                                                                             border="0"
-                                                                                            alt=""
+                                                                                            alt="${organization} Logo"
                                                                                             style="width: 175px; min-width: 175px; max-width: 175px; height: 125px; min-height: 125px; max-height: 125px; font-size: 0;"
                                                                                         />
                                                                                     </td>
