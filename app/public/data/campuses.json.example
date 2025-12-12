@@ -1,0 +1,12 @@
+{
+  "campuses": [
+    {
+      "name": "Main Campus",
+      "organization": "Your Organization Name",
+      "address": "123 Main Street • City, State 12345",
+      "phone": "555-123-4567",
+      "id": "main_campus",
+      "logoPath": "images/logos/logo.png"
+    }
+  ]
+}

@@ -76,3 +76,6 @@ jspm_packages/
 tmp/
 temp/
 signature.html
+
+# User-specific data files (use .example templates instead)
+app/public/data/campuses.json

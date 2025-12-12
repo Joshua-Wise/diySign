@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 // Path to campuses data file
 const CAMPUSES_FILE = path.join(__dirname, '../public/data/campuses.json');
+const CAMPUSES_EXAMPLE_FILE = path.join(__dirname, '../public/data/campuses.json.example');
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -49,12 +50,24 @@ const upload = multer({
 function readCampusesData() {
   try {
     if (!fs.existsSync(CAMPUSES_FILE)) {
-      // If file doesn't exist, create it with default data
-      const defaultData = { campuses: [] };
-      fs.writeFileSync(CAMPUSES_FILE, JSON.stringify(defaultData, null, 2));
-      return defaultData;
+      // If file doesn't exist, create it from the example template
+      console.log('campuses.json not found, creating from template...');
+
+      if (fs.existsSync(CAMPUSES_EXAMPLE_FILE)) {
+        // Copy the example file to create campuses.json
+        const exampleData = fs.readFileSync(CAMPUSES_EXAMPLE_FILE, 'utf8');
+        fs.writeFileSync(CAMPUSES_FILE, exampleData);
+        console.log('Created campuses.json from campuses.json.example');
+        return JSON.parse(exampleData);
+      } else {
+        // Fallback: create empty campuses file if example doesn't exist
+        console.warn('campuses.json.example not found, creating empty campuses.json');
+        const defaultData = { campuses: [] };
+        fs.writeFileSync(CAMPUSES_FILE, JSON.stringify(defaultData, null, 2));
+        return defaultData;
+      }
     }
-    
+
     const data = fs.readFileSync(CAMPUSES_FILE, 'utf8');
     return JSON.parse(data);
   } catch (error) {
