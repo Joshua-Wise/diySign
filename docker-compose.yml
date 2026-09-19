@@ -8,7 +8,7 @@ name: diysign
 
 services:
   app:
-    image: ghcr.io/joshua-wise/diysign:latest
+    image: ghcr.io/joshua-wise/diysign:63d85f6859ea
     # Matches the pre-GitOps deployment. nginx-proxy-manager is NOT on this
     # stack's network — it reaches diySign via the published host port, so
     # the host side of this mapping is load-bearing.
