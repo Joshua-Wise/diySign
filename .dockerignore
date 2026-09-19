@@ -1,7 +1,12 @@
 node_modules
 npm-debug.log
 .git
+.github
 .gitignore
 .DS_Store
 README.md
 .env
+.env.example
+docker-compose*.yml
+# Live data lives in the diysign-data volume; never bake a local copy in.
+app/public/data/campuses.json

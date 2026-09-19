@@ -1,0 +1,104 @@
+name: build
+
+# Builds the diySign image, pushes it to GHCR, then pins docker-compose.yml to
+# the new tag. Arcane syncs this repo, so the committed tag IS the deployed
+# version — the bump commit is the deploy.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      # The last step of this workflow commits docker-compose.yml. Without
+      # this the bump commit would retrigger the build, forever.
+      - 'docker-compose.yml'
+      - 'README.md'
+  workflow_dispatch:
+
+# contents: write → commit the tag bump back to the default branch
+# packages: write → push to ghcr.io
+permissions:
+  contents: write
+  packages: write
+
+concurrency:
+  # Serialize: two builds racing to commit docker-compose.yml would conflict.
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  # GHCR rejects uppercase path segments; the repo is "Joshua-Wise/diySign".
+  IMAGE: ghcr.io/joshua-wise/diysign
+  COMPOSE_FILE: docker-compose.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Default ref (the pushed commit) is deliberate: the image must contain
+      # exactly the code that GITHUB_SHA names, since that SHA becomes the tag.
+      - uses: actions/checkout@v4
+
+      - name: Compute short SHA
+        id: vars
+        run: echo "sha=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # No build args: diySign has no build-time config. The frontend is
+      # static files served as-is by Express, and everything configurable
+      # (ADMIN_PASSWORD, NODE_ENV, PORT) is read at runtime from the deployed
+      # .env. If a bundler with compiled-in env vars is ever added, those
+      # values must come from Actions variables/secrets here and fail the
+      # build with ::error:: when unset.
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.vars.outputs.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+      # The checkout above is the pushed commit, which may no longer be the
+      # branch tip (another push can land mid-build). Committing on top of it
+      # and pushing would be a non-fast-forward and get rejected, so rebuild
+      # the bump on the CURRENT tip each attempt instead.
+      - name: Pin docker-compose.yml to the new tag
+        env:
+          SHA: ${{ steps.vars.outputs.sha }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch --no-tags origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            sed -i -E "s|^([[:space:]]*image:[[:space:]]*)${IMAGE}:[^[:space:]]*|\1${IMAGE}:${SHA}|" "$COMPOSE_FILE"
+            if git diff --quiet -- "$COMPOSE_FILE"; then
+              if grep -q "image: ${IMAGE}:${SHA}$" "$COMPOSE_FILE"; then
+                echo "$COMPOSE_FILE already pinned to ${SHA}; nothing to commit"
+                exit 0
+              fi
+              echo "::error::No '${IMAGE}:<tag>' image line found in $COMPOSE_FILE to rewrite"
+              exit 1
+            fi
+            grep -n "image: ${IMAGE}:" "$COMPOSE_FILE"
+            git add "$COMPOSE_FILE"
+            git commit -m "deploy: diysign:${SHA} [skip ci]"
+            if git push origin "HEAD:$BRANCH"; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); retrying on the new tip"
+            sleep $((attempt * 3))
+          done
+          echo "::error::Could not push the tag bump to $BRANCH after 5 attempts"
+          exit 1

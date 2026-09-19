@@ -1,15 +1,52 @@
+# Deployed by Arcane, which syncs this repo. The image tag below is rewritten to
+# the new commit SHA by .github/workflows/build.yml, so that line IS the
+# deployed version — don't edit it by hand except to roll back to an older SHA.
+#
+# Pin the project name so volume/network/container names don't depend on the
+# directory Arcane checks the repo out into.
+name: diysign
+
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/joshua-wise/diysign:latest
+    # Matches the pre-GitOps deployment. nginx-proxy-manager is NOT on this
+    # stack's network — it reaches diySign via the published host port, so
+    # the host side of this mapping is load-bearing.
     container_name: diySign
     ports:
-      - "3000:3000"
-    volumes:
-      - ./app:/app/app
-      - ./package.json:/app/package.json
+      - "${HOST_PORT:-3010}:3000"
+    env_file:
+      - path: .env
+        required: false
     environment:
-      - NODE_ENV=production
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-your_secure_password_here}
+      NODE_ENV: ${NODE_ENV:-production}
+      # Pinned, not taken from .env: the old .env set PORT=3010 (meaning the
+      # host port). Passed through env_file it would make node listen on 3010
+      # inside the container and the 3010:3000 mapping would hit nothing.
+      PORT: "3000"
+      # No default on purpose. The app falls back to the publicly documented
+      # "admin123" when this is unset, which would silently expose the admin
+      # panel — so refuse to deploy instead.
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set in .env}
+    volumes:
+      # campuses.json is created/edited through the admin UI.
+      - diysign-data:/app/app/public/data
+      # Logos uploaded through the admin UI. On first use the empty volume is
+      # seeded from the image (the bundled district logos).
+      - diysign-logos:/app/app/public/images/logos
+    healthcheck:
+      # 127.0.0.1, not localhost: localhost can resolve to ::1 first, and a
+      # server bound IPv4-only would then leave the container unhealthy.
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
     restart: unless-stopped
+
+volumes:
+  # Explicit names so the data survives a project rename.
+  diysign-data:
+    name: diysign-data
+  diysign-logos:
+    name: diysign-logos
