@@ -37,9 +37,11 @@ jobs:
       # exactly the code that GITHUB_SHA names, since that SHA becomes the tag.
       - uses: actions/checkout@v4
 
-      - name: Compute short SHA
+      - name: Compute short SHA and build time
         id: vars
-        run: echo "sha=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "sha=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
+          echo "created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-buildx-action@v3
 
@@ -71,7 +73,7 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.version=${{ steps.vars.outputs.sha }}
-            org.opencontainers.image.created=${{ github.event.repository.updated_at }}
+            org.opencontainers.image.created=${{ steps.vars.outputs.created }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: false
