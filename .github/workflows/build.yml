@@ -63,6 +63,15 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ steps.vars.outputs.sha }}
             ${{ env.IMAGE }}:latest
+          # Stamp the commit into the image so the running container can be
+          # traced back to a commit: `docker inspect` on the container shows
+          # org.opencontainers.image.revision. buildx adds no labels on its
+          # own, so without this the deployed image is anonymous.
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.version=${{ steps.vars.outputs.sha }}
+            org.opencontainers.image.created=${{ github.event.repository.updated_at }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: false
